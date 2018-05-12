@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">SimpleWeather</string>
+    <string name="sunrise_place_holder">日出时间：%1$s</string>
+    <string name="sunset_place_holder">日落时间：%1$s</string>
+    <string name="aqi_place_holder">PM2.5：%1$d</string>
+    <string name="fx_place_holder">风向：%1$s</string>
+    <string name="fl_place_holder"><![CDATA[风速：%1$s]]></string>
+    <string name="type_place_holder">天气：%1$s</string>
+    <string name="notice_place_holder">温馨提示：%1$s</string>
+    <string name="city_place_holder">当前城市：%1$s</string>
+    <string name="update_date_place_holder">更新时间：%1$s</string>
+    <string name="shi_du_place_holder">湿度：%1$s</string>
+    <string name="pm10_place_holder">PM10：%1$d</string>
+    <string name="quality_place_holder">空气质量：%1$s</string>
+    <string name="wen_du_place_holder">温度：%1$d</string>
+    <string name="title_activity_weather">WeatherActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_city_picker">CityPickerActivity</string>
+</resources>

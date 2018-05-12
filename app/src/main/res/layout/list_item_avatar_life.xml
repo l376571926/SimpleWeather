@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#88888888"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        tools:text="2018-05-11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="空调指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/kong_tiao_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="较少开启" />
+
+    <TextView
+        android:id="@+id/kong_tiao_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="您将感到很舒适，一般不需要开启空调。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="运动指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/yun_dong_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="较不宜" />
+
+    <TextView
+        android:id="@+id/yun_dong_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="有降水，推荐您在室内进行健身休闲运动；若坚持户外运动，须注意携带雨具并注意避雨防滑。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="紫外线强度"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/zi_wai_xian_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="最弱" />
+
+    <TextView
+        android:id="@+id/zi_wai_xian_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="属弱紫外线辐射天气，无需特别防护。若长期在户外，建议涂擦SPF在8-12之间的防晒护肤品。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="感冒指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/gan_mao_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="少发" />
+
+    <TextView
+        android:id="@+id/gan_mao_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="各项气象条件适宜，无明显降温过程，发生感冒机率较低。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="洗车指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/xi_che_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="不宜" />
+
+    <TextView
+        android:id="@+id/xi_che_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="污染指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/wu_ran_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="" />
+
+    <TextView
+        android:id="@+id/wu_ran_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="穿衣指数"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/chuan_yi_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="舒适" />
+
+    <TextView
+        android:id="@+id/chuan_yi_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:textColor="@android:color/white"
+        tools:text="建议着长袖T恤、衬衫加单裤等服装。年老体弱者宜着针织长袖衬衫、马甲和长裤。" />
+</LinearLayout>

@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'test'
+            keyPassword '123456'
+            storeFile file('test.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "ipw.ph.simpleweather"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        signingConfig signingConfigs.config
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //安卓原生开发框架
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    //网络请求框架
+    implementation 'com.zhy:okhttputils:2.6.2'
+    //因okhttputils中使用的是旧版本的okio与okhttp，所以这里引用官方最新的替代它
+    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    //开发日志辅助打印框架
+    implementation 'com.orhanobut:logger:2.2.0'
+    //JSON解析框架
+    implementation 'com.google.code.gson:gson:2.8.4'
+    //列表适配器辅助框架
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38'
+    //城市选择框架
+    implementation 'com.zaaach:citypicker:2.0.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.lzy.net:okgo:3.0.4'
+}
