@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -33,6 +34,27 @@ import java.util.List;
 import java.util.Locale;
 
 public class WeatherActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    /**
+     * 天气图标资源配置表
+     */
+    private static SparseIntArray mWeatherIconIdArray = new SparseIntArray();
+
+    static {
+        mWeatherIconIdArray.put(0, R.drawable.weather_sunny);//睛
+        mWeatherIconIdArray.put(1, R.drawable.weather_cloudy);//多云
+        mWeatherIconIdArray.put(2, R.drawable.weather_cloudy);//阴
+        mWeatherIconIdArray.put(3, R.drawable.weather_rainy);//阵雨
+        mWeatherIconIdArray.put(4, R.drawable.weather_rainy);//雷阵雨
+        mWeatherIconIdArray.put(5, 0);//待确认天气
+        mWeatherIconIdArray.put(6, 0);//待确认天气
+        mWeatherIconIdArray.put(7, R.drawable.weather_rainy);//小雨
+        mWeatherIconIdArray.put(8, R.drawable.weather_pouring);//中雨
+        mWeatherIconIdArray.put(9, R.drawable.weather_pouring);//大雨
+        mWeatherIconIdArray.put(10, 0);//待确认天气
+        mWeatherIconIdArray.put(11, 0);//待确认天气
+        mWeatherIconIdArray.put(12, 0);//待确认天气
+        mWeatherIconIdArray.put(13, 0);//待确认天气
+    }
 
     private RecyclerView mRecyclerView;
     private CustomAdapter mCustomAdapter;
@@ -45,15 +67,6 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_weather);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -192,8 +205,9 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                     helper.setText(R.id.date, "当前时间：" + realtimeBean.getDate());
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     helper.setText(R.id.data_up_time, "数据更新时间：" + format.format(new Date(Long.parseLong(realtimeBean.getDataUptime()) * 1000)));
-                    helper.setText(R.id.info, "实时天气状况：" + realtimeBean.getWeather().getInfo());
-                    helper.setText(R.id.temperature, "实时温度：" + realtimeBean.getWeather().getTemperature());
+                    helper.setImageResource(R.id.weather_image, mWeatherIconIdArray.get(Integer.parseInt(realtimeBean.getWeather().getImg())));
+                    helper.setText(R.id.info, realtimeBean.getWeather().getInfo());
+                    helper.setText(R.id.temperature, realtimeBean.getWeather().getTemperature());
                     break;
                 case AvatarWeather.VIEW_TYPE_LIFE:
                     AvatarWeather.ResultBean.LifeBean lifeBean = (AvatarWeather.ResultBean.LifeBean) item;
@@ -254,35 +268,39 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                     helper.setText(R.id.week, weatherBeanX.getWeek());
                     helper.setText(R.id.nongli, weatherBeanX.getNongli());
 
-                    helper.setText(R.id.dawn_1, weatherBeanX.getInfo().getDawn().get(0));
-                    helper.setText(R.id.dawn_2, weatherBeanX.getInfo().getDawn().get(1));
-                    helper.setText(R.id.dawn_3, weatherBeanX.getInfo().getDawn().get(2));
-                    helper.setText(R.id.dawn_4, weatherBeanX.getInfo().getDawn().get(3));
-                    helper.setText(R.id.dawn_5, weatherBeanX.getInfo().getDawn().get(4));
-                    helper.setText(R.id.dawn_6, weatherBeanX.getInfo().getDawn().get(5));
-                    if (weatherBeanX.getInfo().getDawn().size() > 6) {
-                        helper.setText(R.id.dawn_notice, weatherBeanX.getInfo().getDawn().get(6));
-                    }
+                    AvatarWeather.ResultBean.WeatherBeanX.InfoBeanX infoBeanX = weatherBeanX.getInfo();
+                    List<String> dawnInfoList = infoBeanX.getDawn();
+                    List<String> dayInfoList = infoBeanX.getDay();
+                    List<String> nightInfoList = infoBeanX.getNight();
 
-                    helper.setText(R.id.day_1, weatherBeanX.getInfo().getDay().get(0));
-                    helper.setText(R.id.day_2, weatherBeanX.getInfo().getDay().get(1));
-                    helper.setText(R.id.day_3, weatherBeanX.getInfo().getDay().get(2));
-                    helper.setText(R.id.day_4, weatherBeanX.getInfo().getDay().get(3));
-                    helper.setText(R.id.day_5, weatherBeanX.getInfo().getDay().get(4));
-                    helper.setText(R.id.day_6, weatherBeanX.getInfo().getDay().get(5));
-                    if (weatherBeanX.getInfo().getDay().size() > 6) {
-                        helper.setText(R.id.day_notice, weatherBeanX.getInfo().getDay().get(6));
-                    }
+                    RecyclerView recyclerView = (RecyclerView) helper.getView(R.id.item_recycler_view);
+                    BaseQuickAdapter<List<String>, BaseViewHolder> adapter = new BaseQuickAdapter<List<String>, BaseViewHolder>(R.layout.list_item_avatar_item) {
+                        @Override
+                        protected void convert(BaseViewHolder helper, List<String> item) {
+                            int position = helper.getAdapterPosition();
+                            if (position == 0) {
+                                helper.setText(R.id.title, "黎明");
+                            } else if (position == 1) {
+                                helper.setText(R.id.title, "白天");
+                            } else {
+                                helper.setText(R.id.title, "晚上");
+                            }
+                            helper.setImageResource(R.id.weather_image, mWeatherIconIdArray.get(Integer.parseInt(item.get(0))));
+                            helper.setText(R.id.dawn_2, item.get(1));
+                            helper.setText(R.id.dawn_3, item.get(2) + "℃");
+                            helper.setText(R.id.dawn_4, item.get(3));
+                            helper.setText(R.id.dawn_5, item.get(4));
+                            helper.setText(R.id.dawn_6, item.get(5));
+                            if (item.size() > 6) {
+                                helper.setText(R.id.dawn_notice, item.get(6));
+                            }
+                        }
+                    };
+                    recyclerView.setAdapter(adapter);
 
-                    helper.setText(R.id.night_1, weatherBeanX.getInfo().getNight().get(0));
-                    helper.setText(R.id.night_2, weatherBeanX.getInfo().getNight().get(1));
-                    helper.setText(R.id.night_3, weatherBeanX.getInfo().getNight().get(2));
-                    helper.setText(R.id.night_4, weatherBeanX.getInfo().getNight().get(3));
-                    helper.setText(R.id.night_5, weatherBeanX.getInfo().getNight().get(4));
-                    helper.setText(R.id.night_6, weatherBeanX.getInfo().getNight().get(5));
-                    if (weatherBeanX.getInfo().getNight().size() > 6) {
-                        helper.setText(R.id.night_notice, weatherBeanX.getInfo().getNight().get(6));
-                    }
+                    adapter.addData(dawnInfoList);
+                    adapter.addData(dayInfoList);
+                    adapter.addData(nightInfoList);
                     break;
                 default:
                     break;
@@ -300,7 +318,6 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                     public void onSuccess(Response<AvatarWeather> response) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         AvatarWeather avatarWeather = response.body();
-                        Logger.e("");
                         if (avatarWeather.getError_code() == 0) {
                             AvatarWeather.ResultBean resultBean = avatarWeather.getResult();
                             List<AvatarWeather.ResultBean.WeatherBeanX> weatherBeanXList = resultBean.getWeather();
@@ -314,7 +331,9 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
 
                     @Override
                     public AvatarWeather convertResponse(okhttp3.Response response) throws Throwable {
-                        return new Gson().fromJson(response.body().string(), AvatarWeather.class);
+                        String json = response.body().string();
+                        Logger.e(json);
+                        return new Gson().fromJson(json, AvatarWeather.class);
                     }
                 });
     }
