@@ -1,6 +1,7 @@
 package ipw.ph.simpleweather;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -91,8 +92,9 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
         mCustomAdapter = new CustomAdapter();
         mRecyclerView.setAdapter(mCustomAdapter);
 
-        getCityWeatherData();
+        mCurrentCityName = PreferenceManager.getDefaultSharedPreferences(this).getString("lastCity", mCurrentCityName);
         setTitle(mCurrentCityName);
+        getCityWeatherData();
     }
 
     @Override
@@ -135,6 +137,11 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                             String province = data.getProvince();//广东
                             Logger.e("" + name);
                             mCurrentCityName = name;
+
+                            PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this)
+                                    .edit()
+                                    .putString("lastCity", name)
+                                    .apply();
                             getCityWeatherData();
                             setTitle(mCurrentCityName);
                         }
