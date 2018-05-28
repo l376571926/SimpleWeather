@@ -117,7 +117,7 @@ public class AvatarWeather {
             private String date;
             private String city_code;
             private String city_name;
-            private String week;
+            private int week;
             private String moon;
 
             public WindBean getWind() {
@@ -176,11 +176,11 @@ public class AvatarWeather {
                 this.city_name = city_name;
             }
 
-            public String getWeek() {
+            public int getWeek() {
                 return week;
             }
 
-            public void setWeek(String week) {
+            public void setWeek(int week) {
                 this.week = week;
             }
 

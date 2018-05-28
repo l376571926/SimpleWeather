@@ -60,7 +60,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
     private RecyclerView mRecyclerView;
     private CustomAdapter mCustomAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private String mCurrentCityName = "深圳";
+    private String mCurrentCityName = "北京";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,25 +201,57 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                     .registerItemType(AvatarWeather.VIEW_TYPE_WEATHER, R.layout.list_item_avatar_forecast_weather);
         }
 
+        private String getWeekStr(int week) {
+            String weekStr = "";
+            switch (week) {
+                case 0:
+
+                    break;
+                case 1:
+                    weekStr = "周一";
+                    break;
+                case 2:
+                    weekStr = "周二";
+                    break;
+                case 3:
+                    weekStr = "周三";
+                    break;
+                case 4:
+                    weekStr = "周四";
+                    break;
+                case 5:
+                    weekStr = "周五";
+                    break;
+                case 6:
+                    weekStr = "周六";
+                    break;
+                case 7:
+                    weekStr = "周日";
+                    break;
+            }
+            return weekStr;
+        }
+
         @Override
         protected void convert(BaseViewHolder helper, MultiItemEntity item) {
             switch (item.getItemType()) {
                 case AvatarWeather.VIEW_TYPE_REALTIME:
                     AvatarWeather.ResultBean.RealtimeBean realtimeBean = (AvatarWeather.ResultBean.RealtimeBean) item;
                     helper.setText(R.id.city_name, realtimeBean.getCity_name());
-                    helper.setText(R.id.week, "周" + realtimeBean.getWeek());
+                    helper.setText(R.id.week, getWeekStr(realtimeBean.getWeek()));
                     helper.setText(R.id.moon, "农历：" + realtimeBean.getMoon());
                     helper.setText(R.id.date, "当前时间：" + realtimeBean.getDate());
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     helper.setText(R.id.data_up_time, "数据更新时间：" + format.format(new Date(Long.parseLong(realtimeBean.getDataUptime()) * 1000)));
                     helper.setImageResource(R.id.weather_image, mWeatherIconIdArray.get(Integer.parseInt(realtimeBean.getWeather().getImg())));
-                    helper.setText(R.id.info, realtimeBean.getWeather().getInfo());
-                    helper.setText(R.id.temperature, realtimeBean.getWeather().getTemperature());
+                    helper.setText(R.id.info, realtimeBean.getWeather().getInfo() );
+                    helper.setText(R.id.temperature, realtimeBean.getWeather().getTemperature()+ "℃");
                     break;
                 case AvatarWeather.VIEW_TYPE_LIFE:
                     AvatarWeather.ResultBean.LifeBean lifeBean = (AvatarWeather.ResultBean.LifeBean) item;
                     helper.setText(R.id.date, lifeBean.getDate());
 
+                    //空调指数
                     if (lifeBean.getInfo().getKongtiao() != null) {
                         if (lifeBean.getInfo().getKongtiao().size() > 1) {
                             helper.setText(R.id.kong_tiao_1, lifeBean.getInfo().getKongtiao().get(0));
@@ -227,6 +259,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                         }
                     }
 
+                    //运动指数
                     if (lifeBean.getInfo().getYundong() != null) {
                         if (lifeBean.getInfo().getYundong().size() > 1) {
                             helper.setText(R.id.yun_dong_1, lifeBean.getInfo().getYundong().get(0));
@@ -234,6 +267,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                         }
                     }
 
+                    //紫外线强度
                     if (lifeBean.getInfo().getZiwaixian() != null) {
                         if (lifeBean.getInfo().getZiwaixian().size() > 1) {
                             helper.setText(R.id.zi_wai_xian_1, lifeBean.getInfo().getZiwaixian().get(0));
@@ -241,6 +275,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                         }
                     }
 
+                    //感冒指数
                     if (lifeBean.getInfo().getGanmao() != null) {
                         if (lifeBean.getInfo().getGanmao().size() > 1) {
                             helper.setText(R.id.gan_mao_1, lifeBean.getInfo().getGanmao().get(0));
@@ -248,6 +283,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                         }
                     }
 
+                    //洗车指数
                     if (lifeBean.getInfo().getXiche() != null) {
                         if (lifeBean.getInfo().getXiche().size() > 1) {
                             helper.setText(R.id.xi_che_1, lifeBean.getInfo().getXiche().get(0));
@@ -255,19 +291,21 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
                         }
                     }
 
-                    if (lifeBean.getInfo().getWuran() != null) {
-                        if (lifeBean.getInfo().getWuran().size() > 1) {
-                            helper.setText(R.id.wu_ran_1, lifeBean.getInfo().getWuran().get(0));
-                            helper.setText(R.id.wu_ran_2, lifeBean.getInfo().getWuran().get(1));
-                        }
-                    }
+                    //污染指数
+//                    if (lifeBean.getInfo().getWuran() != null) {
+//                        if (lifeBean.getInfo().getWuran().size() > 1) {
+//                            helper.setText(R.id.wu_ran_1, lifeBean.getInfo().getWuran().get(0));
+//                            helper.setText(R.id.wu_ran_2, lifeBean.getInfo().getWuran().get(1));
+//                        }
+//                    }
 
-                    if (lifeBean.getInfo().getWuran() != null) {
-                        if (lifeBean.getInfo().getWuran().size() > 1) {
-                            helper.setText(R.id.chuan_yi_1, lifeBean.getInfo().getWuran().get(0));
-                            helper.setText(R.id.chuan_yi_2, lifeBean.getInfo().getChuanyi().get(1));
-                        }
-                    }
+                    //穿衣指数
+//                    if (lifeBean.getInfo().getWuran() != null) {
+//                        if (lifeBean.getInfo().getWuran().size() > 1) {
+//                            helper.setText(R.id.chuan_yi_1, lifeBean.getInfo().getWuran().get(0));
+//                            helper.setText(R.id.chuan_yi_2, lifeBean.getInfo().getChuanyi().get(1));
+//                        }
+//                    }
                     break;
                 case AvatarWeather.VIEW_TYPE_WEATHER:
                     AvatarWeather.ResultBean.WeatherBeanX weatherBeanX = (AvatarWeather.ResultBean.WeatherBeanX) item;

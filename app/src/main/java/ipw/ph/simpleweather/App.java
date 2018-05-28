@@ -6,6 +6,9 @@ import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
+/**
+ * 初始化
+ */
 public class App extends Application {
     @Override
     public void onCreate() {
